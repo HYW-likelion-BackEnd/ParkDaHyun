@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+  <div class = "container">
+    <h1>Todo List</h1>
+    <p>
+      <a href="{% url 'todo_post' %}"><i class = "bi-plus">Add Todo</i></a>
+      <a href="{% url 'done_list' %}" class="btn btn-primary" style ="float:right">완료한 Todo List </a>
+    </p>
+    <ul class = "list-group">
+      {% for todo in todos %}
+      <li class="list-group-item">
+        <a href="{% url 'todo_detail' pk=todo.pk %}"> {{todo.title}}</a>
+        {% if todo.important %}
+          <span class="badge badge-danger">!</span>
+        {% endif %}
+        <div style="float:right">
+          <a href="{% url 'todo_done' pk=todo.pk %}" class ="btn btn-primary">완료</a>
+          <a href="{% url 'todo_edit' pk=todo.pk %}" class ="badge badge-danger">Edit Todo</a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</body>
+</html>
+
